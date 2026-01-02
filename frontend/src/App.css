@@ -1,0 +1,304 @@
+/* --- FONTS --- */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&family=Zilla+Slab:wght@500;700&display=swap');
+
+/* --- COLORS & VARS --- */
+:root {
+  --primary-red: #ff2143;
+  --bg-dark: #111111;
+  --bg-card: #1c1c1c;
+  --font-titles: 'Zilla Slab', serif;
+  --font-body: 'Roboto', sans-serif;
+  --text-main: #ffffff;
+  --text-muted: #a0a0a0;
+  --border-color: #333333;
+  --nav-height: 80px;
+  --nav-transition: 0.3s ease-in-out;
+}
+
+html, body {
+  width: 100%;
+  overflow-x: hidden;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+main {
+  padding-top: 80px; /* Navbar height */
+  min-height: 100vh;
+}
+
+body {
+  background-color: var(--bg-dark);
+  color: var(--text-main);
+  font-family: var(--font-body);
+}
+
+/* --- NAVBAR STRUCTURE --- */
+.Navbar-header {
+  background-color: var(--bg-card);
+  height: var(--nav-height);
+  width: 100%;
+  border-bottom: 1px solid var(--border-color);
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+}
+
+.Navbar-header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 0 2rem;
+  height: 100%;
+}
+
+/* .Navbar-header-link-logo, 
+.Navbar-links, 
+.Navbar-header-container::after {
+  flex: 1;
+} */
+
+.Navbar-header-link-logo {
+  flex: 1;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.Navbar-header-logo {
+  height: 45px;
+  width: auto;
+}
+
+.Navbar-links {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  list-style: none;
+  padding: 0;
+}
+
+.Navbar-header-container::after {
+  content: "";
+  flex: 1;
+}
+
+.Navbar-header-link-logo-container,
+nav,
+.Navbar-header-right {
+  flex: 1; 
+  display: flex;
+}
+
+.Navbar-header-link-logo-container {
+  justify-content: flex-start;
+}
+
+nav {
+  justify-content: center;
+}
+
+.Navbar-header-right {
+  justify-content: flex-end;
+}
+
+/* --- NAV LINKS STYLE --- */
+.Navbar-links a {
+  font-family: var(--font-titles);
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: all var(--nav-transition);
+  font-weight: 500;
+  position: relative;
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  white-space: nowrap;
+  padding: 4px 0;
+}
+
+.Navbar-links a::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: 0;
+  left: 50%;
+  background-color: var(--primary-red);
+  transition: all var(--nav-transition);
+  transform: translateX(-50%);
+}
+
+.Navbar-links a.active {
+  color: var(--text-main);
+  text-shadow: 0 0 5px rgba(255, 255, 255, 0.2);
+}
+
+.Navbar-links a:hover,
+.Navbar-links a.active:hover {
+  color: var(--primary-red);
+  text-shadow: 0 0 4px rgba(255, 33, 67, 0.3), 
+               0 0 8px rgba(255, 33, 67, 0.2);
+}
+
+.Navbar-links a:hover::after,
+.Navbar-links a.active:hover::after {
+  width: 100%;
+}
+
+ .Navbar-hamburger {
+    display: none;
+    background: none;
+    border: none;
+  }
+
+/* --- RESPONSIVE --- */
+
+@media (max-width: 1023px) {
+
+  .Navbar-header-link-logo-container,
+  .Navbar-header-right {
+    flex: none;
+  }
+  .Navbar-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    margin: 0;
+    height: auto;
+    padding: 1rem 0;
+  
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: var(--bg-card);
+  }
+
+  .Navbar-mobile-top-bar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    gap: 0.5rem;
+    padding: 5px;
+  }
+
+  .Navbar-links {
+    width: 100%; 
+    position: absolute;
+    top: 100%; 
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    /* animation */
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.5s ease, visibility 0.5s;
+    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem 0;
+    z-index: 1000;
+  }
+
+  .Navbar-links.active {
+    opacity: 1;
+    visibility: visible;
+  }
+  .Navbar-header-container {
+    justify-content: center;
+    position: relative;
+  }
+
+  .Navbar-header-link-logo {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    padding: 0;
+    transition: opacity 0.4s ease, visibility 0.4s;
+  }
+
+  /* .Navbar-header-link-logo.fade-out {
+  opacity: 0;
+  visibility: hidden;
+  } */
+
+  .Navbar-header-logo {
+    height: 30px;
+    width: auto;
+  }
+
+  .Navbar-header-container::after {
+    display: none;
+  }
+  
+  .Navbar-hamburger span {
+    width: 24px;
+    height: 1.5px;
+    background-color: var(--text-main);
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .Navbar-hamburger {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding: 8px;
+    background: none;
+    border: none;
+  }
+
+  .Navbar-hamburger:focus {
+    outline: none;
+  }
+
+  .Navbar-hamburger:focus-visible {
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+}
+
+  /* Burger Menu animation  */
+  .Navbar-hamburger.open span:nth-child(1) {
+    transform: translateY(6.5px) rotate(45deg);
+  }
+  .Navbar-hamburger.open span:nth-child(2) {
+    opacity: 0;
+  }
+  .Navbar-hamburger.open span:nth-child(3) {
+    transform: translateY(-6.5px) rotate(-45deg);
+  }
+
+  /* Menu stagger effect */
+  .Navbar-links li {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+  }
+  .Navbar-links.active li {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .Navbar-links.active li:nth-child(1) { transition-delay: 0.1s; }
+  .Navbar-links.active li:nth-child(2) { transition-delay: 0.18s; } /* +0.08s */
+  .Navbar-links.active li:nth-child(3) { transition-delay: 0.25s; } /* +0.07s */
+  .Navbar-links.active li:nth-child(4) { transition-delay: 0.31s; } /* +0.06s */
+  .Navbar-links.active li:nth-child(5) { transition-delay: 0.36s; } /* +0.05s */
+  .Navbar-links.active li:nth-child(6) { transition-delay: 0.40s; } /* +0.04s */
+  .Navbar-links.active li:nth-child(7) { transition-delay: 0.43s; } /* +0.03s */
+  .Navbar-links.active li:nth-child(8) { transition-delay: 0.45s; } /* +0.02s */
+}
+ 

@@ -1,4 +1,18 @@
-.env
+# Dependancies
 node_modules/
-data.json
+frontend/node_modules/
+backend/node_modules/
+
+# Builds
+dist/
+frontend/dist/
+
+# Environnements
+.env
+.env.local
+*.env
+
+# System files
 .DS_Store
+.vscode/
+.idea/
