@@ -232,10 +232,10 @@ nav {
     transition: opacity 0.4s ease, visibility 0.4s;
   }
 
-  .Navbar-header-link-logo.fade-out {
+  /* .Navbar-header-link-logo.fade-out {
   opacity: 0;
   visibility: hidden;
-  }
+  } */
 
   .Navbar-header-logo {
     height: 30px;
@@ -273,13 +273,13 @@ nav {
 
   /* Burger Menu animation  */
   .Navbar-hamburger.open span:nth-child(1) {
-    transform: translateY(7.5px) rotate(45deg);
+    transform: translateY(6.5px) rotate(45deg);
   }
   .Navbar-hamburger.open span:nth-child(2) {
     opacity: 0;
   }
   .Navbar-hamburger.open span:nth-child(3) {
-    transform: translateY(-7.5px) rotate(-45deg);
+    transform: translateY(-6.5px) rotate(-45deg);
   }
 
   /* Menu stagger effect */
