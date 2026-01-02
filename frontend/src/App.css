@@ -1,4 +1,7 @@
-/* --- FONTS --- */
+/* ==========================================
+   1. STYLES (Variables, Colors, Fonts)
+   ========================================== */
+
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&family=Zilla+Slab:wght@500;700&display=swap');
 
 /* --- COLORS & VARS --- */
@@ -14,6 +17,10 @@
   --nav-height: 80px;
   --nav-transition: 0.3s ease-in-out;
 }
+
+/* ==========================================
+   2. BASE & RESET
+   ========================================== */
 
 html, body {
   width: 100%;
@@ -37,7 +44,21 @@ body {
   font-family: var(--font-body);
 }
 
-/* --- NAVBAR DESKTOP STRUCTURE --- */
+ /* Accessibility design */
+:focus {
+  outline: none;
+}
+
+.Navbar-links a:focus-visible,
+.Navbar-hamburger:focus-visible {
+  outline: 1px solid var(--text-muted);
+  outline-offset: 4px; /* space between text and underline */
+  border-radius: 2px;
+}
+
+/* ==========================================
+   3. GENERAL STYLE
+   ========================================== */
 
 .Navbar-header {
   background-color: var(--bg-card);
@@ -52,6 +73,18 @@ body {
   align-items: center;
 }
 
+.Navbar-header-logo {
+  height: 45px;
+  width: auto;
+  display: block;
+}
+
+/* ==========================================
+   4. DESKTOP MODE ( > 1024px )
+   ========================================== */
+
+@media (min-width: 1024px) {
+
 .Navbar-header-container {
   display: flex;
   justify-content: space-between;
@@ -61,7 +94,7 @@ body {
   height: 100%;
 }
 
-/* On définit nos 3 piliers comme des blocs de largeur égale */
+/* Three equal columns */
 .Navbar-header-link-logo-container,
 nav,
 .Navbar-header-right {
@@ -70,23 +103,19 @@ nav,
   align-items: center;
 }
 
-/* On aligne le contenu à l'intérieur de chaque tiers */
+/* Logo on the left */
 .Navbar-header-link-logo-container {
-  justify-content: flex-start; /* Logo calé à gauche */
+  justify-content: flex-start;
 }
 
+/* Links in the absolute middle of the page */
 nav {
-  justify-content: center; /* Liens calés au centre ABSOLU de la page */
+  justify-content: center;
 }
 
+/* Empty space for future language toggle and connexion */
 .Navbar-header-right {
-  justify-content: flex-end; /* Espace vide ou bouton calé à droite */
-}
-
-.Navbar-header-logo {
-  height: 45px;
-  width: auto;
-  display: block;
+  justify-content: flex-end;
 }
 
 .Navbar-links {
@@ -95,56 +124,57 @@ nav {
   list-style: none;
   padding: 0;
   margin: 0;
-  white-space: nowrap; /* Empêche les liens de s'empiler */
+  white-space: nowrap; /* prevents links to collapse */
 }
 
+/* Links and hover styles */
+
 .Navbar-links a {
-  font-family: var(--font-titles); /* Zilla Slab */
-  color: var(--text-muted);       /* Gris sourd de base */
+  font-family: var(--font-titles);
+  color: var(--text-muted);
   text-decoration: none;
   font-weight: 500;
   font-size: 1rem;
   text-transform: uppercase;
   letter-spacing: 1.5px;
   transition: color var(--nav-transition);
-  /* Ajout crucial pour la barre animée ✨ */
+  /* Add for the animated underline */
   position: relative;
-  padding: 4px 0; /* Un peu d'espace pour que la barre ne colle pas trop aux lettres */
+  padding: 4px 0; /* space between text and underline */
 }
 
 .Navbar-links a:hover {
   color: var(--primary-red);
-  /* Double ombre portée pour l'effet Glow */
+  /* double glow effect */
   text-shadow: 0 0 4px rgba(255, 51, 123, 0.3), 
                0 0 8px rgba(164, 0, 219, 0.2);
 }
 
-/* Le lien de la page actuelle passe en blanc pur sans glow */
 .Navbar-links a.active {
-  color: var(--text-main); /* #ffffff */
-  text-shadow: none;       /* On retire le glow pour plus de sobriété */
+  color: var(--text-main);
+  text-shadow: none; /* no glow */
 }
 
-/* La barre sous le lien actif devient blanche aussi */
 .Navbar-links a.active::after {
   width: 100%;
-  background-color: var(--text-main); /* Barre blanche */
+  background-color: var(--text-main);
 }
 
 .Navbar-links a::after {
   content: '';
   position: absolute;
-  width: 0;                /* Elle commence à 0 de large */
-  height: 2px;             /* Épaisseur de la barre */
+  width: 0;                /* starts with a 0 width */
+  height: 2px;             /* underline thickness */
   bottom: 0;
-  left: 50%;               /* On la place au milieu du lien */
+  left: 50%;               /* on the middle of the link */
   background-color: var(--primary-red);
   transition: all var(--nav-transition);
-  transform: translateX(-50%); /* Pour qu'elle s'étende bien depuis le centre */
+  transform: translateX(-50%); /* from center */
 }
 
 .Navbar-links a:hover::after {
   width: 100%;
+}
 }
 
 .Navbar-hamburger {
@@ -154,7 +184,9 @@ nav {
   cursor: pointer;
 }
 
-/* --- RESPONSIVE --- */
+/* ==========================================
+   5. MOBILE MODE ( < 1023px )
+   ========================================== */
 
 @media (max-width: 1023px) {
 
@@ -164,11 +196,11 @@ nav {
   }
   .Navbar-header {
     display: flex;
-    flex-direction: row; /* On garde l'alignement horizontal logo/burger */
-    align-items: center;  /* Centre verticalement tout ce qui est dedans ✨ */
+    flex-direction: row; /* horizontal alignement */
+    align-items: center;  /* vertical center */
     justify-content: center;
-    height: 60px;        /* Fixe une hauteur pour la barre mobile */
-    padding: 0 1rem;     /* Donne un peu d'air sur les côtés sans impacter le haut/bas */
+    height: 60px;
+    padding: 0 1rem;
     background-color: var(--bg-card);
     position: fixed;
     top: 0;
@@ -207,8 +239,8 @@ nav {
     padding: 2rem 0;
     z-index: 1000;
     top: 60px;
-    border-top: none;      /* Optionnel : enlève la bordure haute du menu pour un effet de continuité */
-    border-radius: 0; /* On arrondit seulement le bas pour qu'il soit "collé" en haut */
+    border-top: none;
+    border-radius: 0;
   }
 
   .Navbar-links.active {
@@ -227,11 +259,6 @@ nav {
     padding: 0;
     transition: opacity 0.4s ease, visibility 0.4s;
   }
-
-  /* .Navbar-header-link-logo.fade-out {
-  opacity: 0;
-  visibility: hidden;
-  } */
 
   .Navbar-header-logo {
     height: 30px;
