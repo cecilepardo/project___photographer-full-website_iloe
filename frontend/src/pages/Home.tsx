@@ -1,9 +1,14 @@
-const Home = () => {
+import Hero from '../components/Hero/Hero';
+
+const Home: React.FC = () => {
   return (
-    <div className="container">
-      <h1>Portfolio</h1>
-      <p>J'attends du contenu !</p>
-    </div>
+    <main>
+      <Hero />
+      {/* Ta section Grille viendra juste ici plus tard */}
+      <section style={{ height: '100vh', backgroundColor: '#000' }}>
+        {/* Espace temporaire pour tester le scroll et le fondu du Hero */}
+      </section>
+    </main>
   );
 };
 

@@ -8,11 +8,13 @@ import Series from './pages/Series';
 import Sport from './pages/Sport';
 import Urbex from './pages/Urbex';
 import Voyage from './pages/Voyage';
+import Navbar from './components/Navbar/Navbar';
 
 // Define component with function
 const AppRouter = () => {
   return (
     <Router>
+      <Navbar />
       <Routes>
         <Route path="/" element={<App />}>
           <Route index element={<Home />} />

@@ -18,6 +18,36 @@
   --nav-transition: 0.3s ease-in-out;
 }
 
+/* --- FONTS --- */
+
+h1, h2, h3 {
+  font-family: var(--font-titles);
+  font-weight: 500;
+  line-height: 1.2;
+  margin-bottom: 1rem;
+}
+
+h1 {
+  font-family: var(--font-titles);
+  font-weight: 700;
+  font-size: clamp(2.5rem, 8vw, 4.5rem);
+  letter-spacing: 0.15rem; /* Espacement pour la lisibilité */
+  color: var(--text-main);
+  text-shadow: 
+    2px 2px 4px rgba(42, 27, 10, 0.3),
+    0px 0px 20px rgba(93, 64, 55, 0.6);
+}
+
+h2 {
+  font-family: var(--font-titles);
+  font-weight: 500;
+  font-size: clamp(1.2rem, 3vw, 2rem);
+  letter-spacing: 0.1rem;
+  color: var(--text-main);
+  text-shadow: 1px 1px 5px rgba(42, 27, 10, 0.9),
+   0px 0px 20px rgba(93, 64, 55, 0.8);
+}
+
 /* ==========================================
    2. BASE & RESET
    ========================================== */
@@ -25,6 +55,8 @@
 html, body {
   width: 100%;
   overflow-x: hidden;
+  margin: 0;
+  padding: 0;
 }
 
 * {
@@ -34,8 +66,11 @@ html, body {
 }
 
 main {
-  padding-top: 80px; /* Navbar height */
-  min-height: 100vh;
+  /* padding-top: 80px; Navbar height */
+  /* min-height: 100vh; */
+  width: 100%;
+  padding-top: 0; /* On a enlevé le padding de 80px, n'est-ce pas ? */
+  display: block;
 }
 
 body {
@@ -49,279 +84,4 @@ body {
   outline: none;
 }
 
-.Navbar-links a:focus-visible,
-.Navbar-hamburger:focus-visible {
-  outline: 1px solid var(--text-muted);
-  outline-offset: 4px; /* space between text and underline */
-  border-radius: 2px;
-}
 
-/* ==========================================
-   3. GENERAL STYLE
-   ========================================== */
-
-.Navbar-header {
-  background-color: var(--bg-card);
-  height: var(--nav-height);
-  width: 100%;
-  border-bottom: 1px solid var(--border-color);
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 1000;
-  display: flex;
-  align-items: center;
-}
-
-.Navbar-header-logo {
-  height: 45px;
-  width: auto;
-  display: block;
-}
-
-/* ==========================================
-   4. DESKTOP MODE ( > 1024px )
-   ========================================== */
-
-@media (min-width: 1024px) {
-
-.Navbar-header-container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-  padding: 0 2rem;
-  height: 100%;
-}
-
-/* Three equal columns */
-.Navbar-header-link-logo-container,
-nav,
-.Navbar-header-right {
-  flex: 1; 
-  display: flex;
-  align-items: center;
-}
-
-/* Logo on the left */
-.Navbar-header-link-logo-container {
-  justify-content: flex-start;
-}
-
-/* Links in the absolute middle of the page */
-nav {
-  justify-content: center;
-}
-
-/* Empty space for future language toggle and connexion */
-.Navbar-header-right {
-  justify-content: flex-end;
-}
-
-.Navbar-links {
-  display: flex;
-  gap: 2rem;
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  white-space: nowrap; /* prevents links to collapse */
-}
-
-/* Links and hover styles */
-
-.Navbar-links a {
-  font-family: var(--font-titles);
-  color: var(--text-muted);
-  text-decoration: none;
-  font-weight: 500;
-  font-size: 1rem;
-  text-transform: uppercase;
-  letter-spacing: 1.5px;
-  transition: color var(--nav-transition);
-  /* Add for the animated underline */
-  position: relative;
-  padding: 4px 0; /* space between text and underline */
-}
-
-.Navbar-links a:hover {
-  color: var(--primary-red);
-  /* double glow effect */
-  text-shadow: 0 0 4px rgba(255, 51, 123, 0.3), 
-               0 0 8px rgba(164, 0, 219, 0.2);
-}
-
-.Navbar-links a.active {
-  color: var(--text-main);
-  text-shadow: none; /* no glow */
-}
-
-.Navbar-links a.active::after {
-  width: 100%;
-  background-color: var(--text-main);
-}
-
-.Navbar-links a::after {
-  content: '';
-  position: absolute;
-  width: 0;                /* starts with a 0 width */
-  height: 2px;             /* underline thickness */
-  bottom: 0;
-  left: 50%;               /* on the middle of the link */
-  background-color: var(--primary-red);
-  transition: all var(--nav-transition);
-  transform: translateX(-50%); /* from center */
-}
-
-.Navbar-links a:hover::after {
-  width: 100%;
-}
-}
-
-.Navbar-hamburger {
-  display: none; /* Cache le bouton par défaut sur Desktop */
-  background: none;
-  border: none;
-  cursor: pointer;
-}
-
-/* ==========================================
-   5. MOBILE MODE ( < 1023px )
-   ========================================== */
-
-@media (max-width: 1023px) {
-
-  .Navbar-header-link-logo-container,
-  .Navbar-header-right {
-    flex: none;
-  }
-  .Navbar-header {
-    display: flex;
-    flex-direction: row; /* horizontal alignement */
-    align-items: center;  /* vertical center */
-    justify-content: center;
-    height: 60px;
-    padding: 0 1rem;
-    background-color: var(--bg-card);
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 1000;
-}
-
-  .Navbar-mobile-top-bar {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-    gap: 0.5rem;
-    padding: 5px;
-  }
-
-  .Navbar-links {
-    width: 100%; 
-    position: fixed;
-    top: 100%; 
-    left: 50%;
-    transform: translateX(-50%);
-    background: rgba(0, 0, 0, 0.7);
-    backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 8px;
-    /* animation */
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.5s ease, visibility 0.5s;
-    
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 2rem 0;
-    z-index: 1000;
-    top: 60px;
-    border-top: none;
-    border-radius: 0;
-  }
-
-  .Navbar-links.active {
-    opacity: 1;
-    visibility: visible;
-  }
-  .Navbar-header-container {
-    justify-content: center;
-    position: relative;
-  }
-
-  .Navbar-header-link-logo {
-    display: flex;
-    justify-content: center;
-    width: 100%;
-    padding: 0;
-    transition: opacity 0.4s ease, visibility 0.4s;
-  }
-
-  .Navbar-header-logo {
-    height: 30px;
-    width: auto;
-  }
-
-  .Navbar-header-container::after {
-    display: none;
-  }
-  
-  .Navbar-hamburger span {
-    width: 24px;
-    height: 1.5px;
-    background-color: var(--text-main);
-    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-
-  .Navbar-hamburger {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-    padding: 8px;
-    background: none;
-    border: none;
-  }
-
-  .Navbar-hamburger:focus {
-    outline: none;
-  }
-
-  .Navbar-hamburger:focus-visible {
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 4px;
-}
-
-  /* Burger Menu animation  */
-  .Navbar-hamburger.open span:nth-child(1) {
-    transform: translateY(6.5px) rotate(45deg);
-  }
-  .Navbar-hamburger.open span:nth-child(2) {
-    opacity: 0;
-  }
-  .Navbar-hamburger.open span:nth-child(3) {
-    transform: translateY(-6.5px) rotate(-45deg);
-  }
-
-  /* Menu stagger effect */
-  .Navbar-links li {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.5s ease, transform 0.5s ease;
-  }
-  .Navbar-links.active li {
-    opacity: 1;
-    transform: translateY(0);
-  }
-  .Navbar-links.active li:nth-child(1) { transition-delay: 0.1s; }
-  .Navbar-links.active li:nth-child(2) { transition-delay: 0.18s; } /* +0.08s */
-  .Navbar-links.active li:nth-child(3) { transition-delay: 0.25s; } /* +0.07s */
-  .Navbar-links.active li:nth-child(4) { transition-delay: 0.31s; } /* +0.06s */
-  .Navbar-links.active li:nth-child(5) { transition-delay: 0.36s; } /* +0.05s */
-  .Navbar-links.active li:nth-child(6) { transition-delay: 0.40s; } /* +0.04s */
-  .Navbar-links.active li:nth-child(7) { transition-delay: 0.43s; } /* +0.03s */
-  .Navbar-links.active li:nth-child(8) { transition-delay: 0.45s; } /* +0.02s */
-}
- 

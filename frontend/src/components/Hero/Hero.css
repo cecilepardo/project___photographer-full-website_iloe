@@ -1,0 +1,35 @@
+/* ==========================================
+   4. HERO
+   ========================================== */
+
+.hero {
+  height: 100vh;
+  width: 100vw;
+  
+  /* On centre l'image et on utilise cover */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  
+  /* Flexbox pour centrer le texte au milieu de l'écran */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  position: relative;
+}
+
+.hero-content {
+  z-index: 2; /* Pour passer au-dessus de l'éventuel overlay */
+  padding: 0 20px;
+}
+
+.hero-content h1 {
+  margin-bottom: 0; /* On réduit l'espace sous le nom */
+}
+
+.hero-content h2 {
+  margin-top: 0; /* On supprime l'espace au-dessus des spécialités */
+}

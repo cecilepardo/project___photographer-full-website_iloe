@@ -1,7 +1,11 @@
 import { useEffect, useRef, useState } from "react";
 import { NavLink } from "react-router-dom";
-import "../App.css";
-import logo from "../assets/logo.png";
+
+import "../Navbar/Navbar.css"
+import logo from "../../assets/logo.png"
+// import "../App.css";
+// import "../Navbar/Navbar.css"
+// import logo from "../assets/logo.png";
 
 function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);

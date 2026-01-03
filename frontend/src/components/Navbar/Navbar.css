@@ -1,0 +1,204 @@
+/* ============================================================
+   1. STYLES GÉNÉRAUX (Base partagée Desktop & Mobile)
+   ============================================================ */
+
+.Navbar-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  height: var(--nav-height);
+  display: flex;
+  align-items: center;
+  /* Glassmorphism de base */
+  background-color: rgba(17, 17, 17, 0.4); 
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  transition: background-color 0.3s ease;
+}
+
+.Navbar-header-logo {
+  height: 45px;
+  width: auto;
+  display: block;
+}
+
+/* Base des liens (partagée pour hériter des typos/couleurs) */
+.Navbar-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+}
+
+.Navbar-links a {
+  font-family: var(--font-titles);
+  color: var(--text-muted);
+  text-decoration: none;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  transition: all var(--nav-transition);
+  position: relative;
+}
+
+.Navbar-links a:hover, .Navbar-links a.active {
+  color: var(--text-main);
+}
+
+/* Hamburger caché par défaut */
+.Navbar-hamburger {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  flex-direction: column;
+  gap: 5px;
+  padding: 8px;
+  z-index: 1001;
+}
+
+/* ============================================================
+   2. MODE DESKTOP (Ecrans >= 1024px)
+   ============================================================ */
+
+@media (min-width: 1024px) {
+  .Navbar-header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 0 2rem;
+    height: 100%;
+  }
+
+  /* Structure en 3 colonnes pour centrage parfait du menu */
+  .Navbar-header-link-logo-container,
+  nav,
+  .Navbar-header-right {
+    flex: 1; 
+    display: flex;
+    align-items: center;
+  }
+
+  nav { justify-content: center; }
+  .Navbar-header-right { justify-content: flex-end; }
+
+  .Navbar-links {
+    gap: 2rem;
+    white-space: nowrap;
+  }
+
+  .Navbar-links a {
+    font-size: 1rem;
+    padding: 4px 0;
+  }
+
+  /* Soulignement animé spécifique au Desktop */
+  .Navbar-links a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 50%;
+    background-color: var(--primary-red);
+    transition: all var(--nav-transition);
+    transform: translateX(-50%);
+  }
+
+  .Navbar-links a:hover::after, 
+  .Navbar-links a.active::after {
+    width: 100%;
+  }
+}
+
+/* ============================================================
+   3. MODE MOBILE (Ecrans < 1024px)
+   ============================================================ */
+
+@media (max-width: 1023px) {
+  .Navbar-header {
+    height: 60px; /* On force une hauteur plus petite sur mobile */
+  }
+
+  .Navbar-header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 0 1.5rem;
+  }
+
+  .Navbar-header-logo {
+    height: 35px;
+  }
+
+  .Navbar-hamburger {
+    display: flex; /* On l'affiche enfin */
+  }
+
+  .Navbar-links.active::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  /* On le place derrière les liens mais devant le Hero */
+  z-index: -1; 
+  background: rgba(0, 0, 0, 0.1); /* Un voile noir très léger */
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+  /* Le menu qui descend */
+  .Navbar-links {
+    position: fixed;
+    top: 60px; /* Juste en dessous du header */
+    left: 0;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem 0;
+    gap: 2rem;
+    
+    /* Effet Glassmorphism mobile */
+    background: rgba(17, 17, 17, 0.8); 
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+
+    /* Animation */
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.4s ease;
+  }
+
+  .Navbar-links.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  /* Liens mobiles plus gros pour le tactile */
+  .Navbar-links a {
+    font-size: 1.2rem;
+    color: var(--text-main); /* Plus lisible sur mobile */
+  }
+
+  /* Animation des barres du burger */
+  .Navbar-hamburger span {
+    width: 24px;
+    height: 2px;
+    background-color: var(--text-main);
+    transition: all 0.3s ease;
+  }
+
+  .Navbar-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .Navbar-hamburger.open span:nth-child(2) { opacity: 0; }
+  .Navbar-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+}
